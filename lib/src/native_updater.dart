@@ -1,25 +1,24 @@
 import 'dart:developer' as developer;
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:in_app_update/in_app_update.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'error_material_alert.dart';
 import 'update_cupertino_alert.dart';
 
 class NativeUpdater {
-  late BuildContext _context;
-  late bool _forceUpdate;
-  late String _appName;
-  String? _appStoreUrl;
-  String? _playStoreUrl;
-  String? _iOSDescription;
-  String? _iOSUpdateButtonLabel;
-  String? _iOSCloseButtonLabel;
-  String? _iOSIgnoreButtonLabel;
-  String? _iOSAlertTitle;
+   BuildContext _context;
+   bool _forceUpdate;
+   String _appName;
+  String _appStoreUrl;
+  String _playStoreUrl;
+  String _iOSDescription;
+  String _iOSUpdateButtonLabel;
+  String _iOSCloseButtonLabel;
+  String _iOSIgnoreButtonLabel;
+  String _iOSAlertTitle;
 
   /// Singleton related
   static final NativeUpdater _nativeUpdaterInstance = NativeUpdater._internal();
@@ -29,14 +28,14 @@ class NativeUpdater {
   /// Displaying update alert
   static displayUpdateAlert(
     BuildContext context, {
-    required bool forceUpdate,
-    String? appStoreUrl,
-    String? playStoreUrl,
-    String? iOSDescription,
-    String? iOSUpdateButtonLabel,
-    String? iOSCloseButtonLabel,
-    String? iOSIgnoreButtonLabel,
-    String? iOSAlertTitle,
+    @required bool forceUpdate,
+    String appStoreUrl,
+    String playStoreUrl,
+    String iOSDescription,
+    String iOSUpdateButtonLabel,
+    String iOSCloseButtonLabel,
+    String iOSIgnoreButtonLabel,
+    String iOSAlertTitle,
   }) async {
     /// Get current installed version of app
     final PackageInfo info = await PackageInfo.fromPlatform();
@@ -76,7 +75,7 @@ class NativeUpdater {
     Widget alert = UpdateCupertinoAlert(
       forceUpdate: _forceUpdate,
       appName: _appName,
-      appStoreUrl: _appStoreUrl!,
+      appStoreUrl: _appStoreUrl,
       description: _iOSDescription ?? selectedDefaultDescription,
       updateButtonLabel: _iOSUpdateButtonLabel ?? 'Update',
       closeButtonLabel: _iOSCloseButtonLabel ?? 'Close App',
